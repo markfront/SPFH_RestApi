@@ -9,7 +9,6 @@ This repository contains code to run SinglePageFullHtml (SPFH) (https://github.c
 $ git clone https://github.com/markfront/SPFH_RestApi.git
 $ cd SPFH_RestApi
 $ ./mvnw clean package
-$ ./mvnw spring-boot:run
 ```
 
 ### Start the Service
