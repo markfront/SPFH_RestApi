@@ -72,15 +72,7 @@ You can also enter the container as root (to debug or monitor) by:
 docker exec -it my-container /bin/bash
 ```
 
-### Test the Api
-
-Open a browser and enter the following in the address bar:
-```
-http://localhost:8282/fget?url=https://www.wonderslist.com/10-most-amazing-places-on-earth
-```
-Note the port number is 8282, which is what you specify when start the docker.
-
-Another note: as the service is trying to run firefox inside the docker container, it might not always work (happened to me).
+Note: as the service is trying to run firefox inside the docker container, it might not work (which you would get error like "Error: no DISPLAY environment variable specified").
 
 It happened to me when I tested the docker container in my Ubuntu laptop. Did some research, found the idea described in the following article seems easier to follow: http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/
 
@@ -96,6 +88,16 @@ Then start the docker container like this:
 ```
 $ sudo docker run -v /tmp:/tmp -v /tmp/.X11-unix/:/tmp/.X11-unix/ -p 8282:8080 -e DISPLAY=$DISPLAY --name my-container my-custom-ubuntu
 ```
+
+
+### Test the Api
+
+Open a browser and enter the following in the address bar:
+```
+http://localhost:8282/fget?url=https://www.wonderslist.com/10-most-amazing-places-on-earth
+```
+Note the port number is 8282, which is what you specify when start the docker.
+
 
 ### Shutdown the Container
 
