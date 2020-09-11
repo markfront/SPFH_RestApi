@@ -17,6 +17,7 @@ RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 
 RUN apt-get install -y firefox
+RUN apt-get install -y xauth
 RUN apt-get install -y firefox-geckodriver
 
 RUN apt-get install -y python3-tk python3-dev
