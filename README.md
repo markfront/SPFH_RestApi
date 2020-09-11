@@ -80,6 +80,23 @@ http://localhost:8282/fget?url=https://www.wonderslist.com/10-most-amazing-place
 ```
 Note the port number is 8282, which is what you specify when start the docker.
 
+Another note: as the service is trying to run firefox inside the docker container, it might not always work (happened to me).
+
+It happened to me when I tested the docker container in my Ubuntu laptop. Did some research, found the idea described in the following article seems easier to follow: http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/
+
+It basically tries to share the firefox in the host with the docker container, so that when you try to open firefox inside the docker container, it actually opens the one installed in the host. Not a perfect solution, but works. You will need to install the following:
+
+```
+$ sudo apt-get install dbus-x11 
+$ sudo apt-get install x11-xserver-utils
+$ xhost +local:docker
+```
+
+Then start the docker container like this:
+```
+$ sudo docker run -v /tmp:/tmp -v /tmp/.X11-unix/:/tmp/.X11-unix/ -p 8282:8080 -e DISPLAY=$DISPLAY --name my-container my-custom-ubuntu
+```
+
 ### Shutdown the Container
 
 ```
