@@ -1,13 +1,16 @@
-.class
+*.class
 
-.log
+*.log
 
-#.jar
-.zip
-.tar
-.gz
-.rar
-.war
+*.jar
+*.zip
+*.tar
+*.gz
+*.rar
+*.war
 
 /out
 /target
+/temp
+
+!/lib/*.jar

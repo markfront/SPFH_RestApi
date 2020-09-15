@@ -22,25 +22,29 @@ public class ServiceController {
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/fget")
-    public PageHtmlData fget(@RequestParam(value = "url", defaultValue = "") String url) {
+    public PageHtmlData fget(
+            @RequestParam(value = "url", defaultValue = "") String page_url,
+            @RequestParam(value = "cache", defaultValue = "true") boolean use_cache
+    ) {
         long id = counter.incrementAndGet();
 
-        System.out.println("raw_url = " + url);
+        System.out.println("raw_url = " + page_url);
+        System.out.println("use_cache = " + use_cache);
 
-        String decoded_url = url;
+        String decoded_url = page_url;
         try {
-            decoded_url = URLDecoder.decode(url, StandardCharsets.UTF_8.name());
+            decoded_url = URLDecoder.decode(page_url, StandardCharsets.UTF_8.name());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        System.out.println("decoded_url = " + url);
+        System.out.println("decoded_url = " + page_url);
 
-        String out_file = SinglePageFullHtml.run(decoded_url, "", "");
+        String out_file = SinglePageFullHtml.run(decoded_url, "", "", use_cache);
 
         String html = getContent(out_file);
 
-        PageHtmlData result = new PageHtmlData(id, url, html);
+        PageHtmlData result = new PageHtmlData(id, page_url, html);
         return result;
     }
 

@@ -13,6 +13,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>SPFH_RestApi</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -36,7 +37,10 @@
 			</exclusions>
 		</dependency>
 
-		<!-- -->
+		<!--
+		add the local jar to system scope: a dirty way to refer to it in maven project
+		Learn More: https://dzone.com/articles/simple-ways-to-add-and-work-with-a-jar-file-in-you
+		-->
 		<dependency>
 			<groupId>com.markfront</groupId>
 			<artifactId>SinglePageFullHtml</artifactId>
@@ -51,7 +55,36 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- set true to include local jars to the far uber jar -->
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
 			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.markfront.SPFH_RestApi.SpfhRestApiApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
 		</plugins>
 	</build>
 
